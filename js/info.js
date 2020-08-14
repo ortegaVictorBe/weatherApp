@@ -1,9 +1,4 @@
 //calling the API
-// let myInit = {
-//     method: "GET",
-//     mode: "cors",
-//     cache: "default",
-// };
 let cityName = localStorage.getItem("name_localCity");
 let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e4dfa41e22f93aa72d2e80838a3bb930`
 

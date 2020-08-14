@@ -5,12 +5,20 @@ const btnSetCity = document.getElementById("btnSetCity");
 
 var citySelected = {};
 var matches = [];
+var cities = {};
+
+
+//load cities
+const loadCities = async () => {
+    const res = await fetch("../data/city.list.min.json");
+    cities = await res.json();
+
+    // console.log(cities);
+}
 
 
 //Search cities
-const searchCities = async searchText => {
-    const res = await fetch("../data/city.list.min.json");
-    const cities = await res.json();
+const searchCities = searchText => {
 
     //Get matches to current input
     matches = cities.filter(city => {
@@ -22,9 +30,12 @@ const searchCities = async searchText => {
         matches = [];
         matchList.innerHTML = "";
     }
-    console.log(matches)
+    // console.log(matches)
     outputHtml(matches);
 }
+
+
+
 
 //results in html
 const outputHtml = matches => {
@@ -63,7 +74,7 @@ setCards.addEventListener('click', e => {
 });
 
 btnSetCity.addEventListener('click', () => {
-
     window.open("info.html", "_self");
-
 })
+
+loadCities();
