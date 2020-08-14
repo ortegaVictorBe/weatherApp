@@ -1,6 +1,6 @@
 //calling the API
 let cityName = localStorage.getItem("name_localCity");
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e4dfa41e22f93aa72d2e80838a3bb930`
+let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e4dfa41e22f93aa72d2e80838a3bb930`
 
 
 var cityWeatherInfo = {};
@@ -15,7 +15,7 @@ const getWeatherData = async () => {
 
     // let url2=`http://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&
     // exclude=hourly,daily&appid={YOUR API KEY}`
-    let url2 = `http://api.openweathermap.org/data/2.5/onecall?lat=${cityWeatherInfo.coord.lat}&lon=${cityWeatherInfo.coord.lon}&units=metric&
+    let url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityWeatherInfo.coord.lat}&lon=${cityWeatherInfo.coord.lon}&units=metric&
     exclude=hourly,minutely&appid=e4dfa41e22f93aa72d2e80838a3bb930`
 
     const resDaily = await fetch(url2);
@@ -53,7 +53,7 @@ const paintGeneral = () => {
     document.getElementById("cityName").innerText = nameCity;
     document.getElementById("date").innerHTML = `${date}<br>${cityWeatherInfo.weather[0].main}`;
 
-    image.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
+    image.src = `https://openweathermap.org/img/wn/${icon}@2x.png`
     document.getElementById("picture").appendChild(image);
 
     temperature.textContent = `${temp}°C`
@@ -76,7 +76,7 @@ const paintDaily = () => {
         day.setDate(day.getDate() + index);
         // day = new Date(dateNow.setDate(dateNow.getDate() + index));
 
-        let iconImg = `http://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png}`
+        let iconImg = `https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png}`
         // <img src="http://openweathermap.org/img/wn/02d@2x.png" class="max-width: 50%;" >
         // <img src="http://openweathermap.org/img/wn/${iconImg}@2x.png">
 
