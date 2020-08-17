@@ -7,6 +7,8 @@ var cityWeatherInfo = {};
 var cityWeatherInfoDaily = [];
 var dateNow = new Date();
 
+const btnChangCity = document.getElementById("btnChangeCity")
+
 
 const getWeatherData = async () => {
 
@@ -69,27 +71,49 @@ const paintDaily = () => {
     let detailTable = document.getElementById("detailTable")
     let nameDays = ["Mon", "Sun", "Tue", "Wen", "Thu", "Fri", "Sat"];
     // let day = new Date(dateNow);
-
-
-    dailyArray.forEach((element, index) => {
+    for (let i = 1; i <= dailyArray.length; i++) {
         let day = new Date(dateNow);
-        day.setDate(day.getDate() + index);
+        day.setDate(day.getDate() + i);
         // day = new Date(dateNow.setDate(dateNow.getDate() + index));
 
-        let iconImg = `https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png}`
+        // let iconImg = `https://openweathermap.org/img/wn/${dailyArray[i].weather[0].icon}@2x.png}`
         // <img src="http://openweathermap.org/img/wn/02d@2x.png" class="max-width: 50%;" >
         // <img src="http://openweathermap.org/img/wn/${iconImg}@2x.png">
 
         detailTable.innerHTML += `<tr class="table-warning">                               
             <td>${nameDays[day.getDay()]}</td>
-            <td>${element.temp.min}°c</td>
-            <td>${element.temp.max}°c</td>
+            <td>${dailyArray[i].temp.min}°c</td>
+            <td>${dailyArray[i].temp.max}°c</td>
           </tr> `
 
-    });
+    }
+
+    // dailyArray.forEach((element, index) => {
+    //     let day = new Date(dateNow);
+    //     day.setDate(day.getDate() + index);
+    //     // day = new Date(dateNow.setDate(dateNow.getDate() + index));
+
+    //     let iconImg = `https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png}`
+    //     // <img src="http://openweathermap.org/img/wn/02d@2x.png" class="max-width: 50%;" >
+    //     // <img src="http://openweathermap.org/img/wn/${iconImg}@2x.png">
+
+    //     detailTable.innerHTML += `<tr class="table-warning">                               
+    //         <td>${nameDays[day.getDay()]}</td>
+    //         <td>${element.temp.min}°c</td>
+    //         <td>${element.temp.max}°c</td>
+    //       </tr> `
+
+    // });
 
     console.table(dailyArray)
 
 }
+
+const changeCity = () => {
+    
+}
+
+
+btnChangCity.addEventListener('click', changeCity);
 
 getWeatherData();

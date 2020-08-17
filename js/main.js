@@ -10,8 +10,18 @@ var citySelected = {};
 var matches = [];
 var cities = {};
 
+//  -------------------------------------------------------
+//  Functions.
+//  -------------------------------------------------------
 
-//start
+//init - Function: intialice the controls
+const init = () => {
+
+    data.style.visibility = "hidden"
+    loading.style.visibility = "hidden"
+}
+
+//start - Function: Checking if we had set LocalCity, 
 const start = () => {
     //Checking if we have the locla city in Local storage
     let localCity = localStorage.getItem("name_localCity")
@@ -33,7 +43,6 @@ const loadCities = async () => {
 
     data.style.visibility = "visible"
     loading.style.display = "none"
-    // console.log(cities);
 }
 
 //Search cities
@@ -52,7 +61,7 @@ const searchCities = searchText => {
     outputHtml(matches);
 }
 
-//results in html
+//outputHtml - function: Show the results in html
 const outputHtml = matches => {
     if (matches.length > 0) {
         const html = matches.map(match => `<div class="card card-body mb-1" id="d${match.id}">
@@ -62,8 +71,23 @@ const outputHtml = matches => {
     }
 }
 
+// setlocalstorage - function : save the seleceted city into the localStorage
+const setLocalStorage = () => {
+    //Saving the local city in the LocalStorage
+    localStorage.setItem("id_localCity", search.getAttribute("id_city"))
+    localStorage.setItem("name_localCity", search.getAttribute("name_city"))
+    localStorage.setItem("lat_localCity", search.getAttribute("lat_city"))
+    localStorage.setItem("lon_localCity", search.getAttribute("lon_city"))
+}
+
+//  -------------------------------------------------------
+//  Events.
+//  -------------------------------------------------------
+
+// input - Event:click - Whe the user type in the input, search inside of the cities loaded, in live
 search.addEventListener('input', () => searchCities(search.value));
 
+//setCards - Event: click - When the user click on the card (city card), set the info 
 setCards.addEventListener('click', e => {
     if (e.target.id.length > 0 && e.target.id != "match-list") {
 
@@ -77,22 +101,20 @@ setCards.addEventListener('click', e => {
         search.setAttribute("lat_city", citySelected.coord.lat)
         search.setAttribute("lon_city", citySelected.coord.lon)
 
-        //Saving the local city
-        localStorage.setItem("id_localCity", search.getAttribute("id_city"))
-        localStorage.setItem("name_localCity", search.getAttribute("name_city"))
-        localStorage.setItem("lat_localCity", search.getAttribute("lat_city"))
-        localStorage.setItem("lon_localCity", search.getAttribute("lon_city"))
+        setLocalStorage();
 
     }
 
 });
 
+//click - event - open the window with the info of city selected
 btnSetCity.addEventListener('click', () => {
     window.open("info.html", "_self");
 })
 
+//  -------------------------------------------------------
+//  Execution Secuence.
+//  -------------------------------------------------------
 
-//Starting
-data.style.visibility = "hidden"
-loading.style.visibility = "hidden"
+init();
 start();
